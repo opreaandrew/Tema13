@@ -10,13 +10,13 @@ public class DailyPlanner {
 
     public DailyPlanner() {
         this.schedules = new ArrayList<>();
-        schedules.add(new DaySchedule(Day.MONDAY,new ArrayList<>()));
-        schedules.add(new DaySchedule(Day.TUESDAY,new ArrayList<>()));
-        schedules.add(new DaySchedule(Day.WEDNESDAY,new ArrayList<>()));
-        schedules.add(new DaySchedule(Day.THURSDAY,new ArrayList<>()));
-        schedules.add(new DaySchedule(Day.FRIDAY,new ArrayList<>()));
-        schedules.add(new DaySchedule(Day.SATURDAY,new ArrayList<>()));
-        schedules.add(new DaySchedule(Day.SUNDAY,new ArrayList<>()));
+        schedules.add(new DaySchedule(Day.MONDAY, new ArrayList<>()));
+        schedules.add(new DaySchedule(Day.TUESDAY, new ArrayList<>()));
+        schedules.add(new DaySchedule(Day.WEDNESDAY, new ArrayList<>()));
+        schedules.add(new DaySchedule(Day.THURSDAY, new ArrayList<>()));
+        schedules.add(new DaySchedule(Day.FRIDAY, new ArrayList<>()));
+        schedules.add(new DaySchedule(Day.SATURDAY, new ArrayList<>()));
+        schedules.add(new DaySchedule(Day.SUNDAY, new ArrayList<>()));
     }
 
     public void addActivity(Day day, String activity) {
