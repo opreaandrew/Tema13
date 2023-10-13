@@ -1,34 +1,70 @@
 package ro.fasttrackit;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import ro.fasttrackit.exceptions.NoActivitiesForDayException;
+import ro.fasttrackit.exceptions.NoActivityException;
+
+import java.util.*;
 
 public class DailyPlanner {
-    List<DaySchedule> schedules;
+    private final List<DaySchedule> schedules;
 
-    public DailyPlanner(List<DaySchedule> schedules) {
-        this.schedules = new ArrayList<>(schedules);
+    public DailyPlanner() {
+        this.schedules = new ArrayList<>();
+        schedules.add(new DaySchedule(Day.MONDAY,new ArrayList<>()));
+        schedules.add(new DaySchedule(Day.TUESDAY,new ArrayList<>()));
+        schedules.add(new DaySchedule(Day.WEDNESDAY,new ArrayList<>()));
+        schedules.add(new DaySchedule(Day.THURSDAY,new ArrayList<>()));
+        schedules.add(new DaySchedule(Day.FRIDAY,new ArrayList<>()));
+        schedules.add(new DaySchedule(Day.SATURDAY,new ArrayList<>()));
+        schedules.add(new DaySchedule(Day.SUNDAY,new ArrayList<>()));
     }
 
-    public void addActivity(String day, String activity){       // if the activity is null throw a custom UNCHECKED exception: NoActivityException
-      if(activity == null){
-//          throw NoActivityException();
-      }
-      schedules.add(new DaySchedule(Day.))
+    public void addActivity(Day day, String activity) {
+        if (activity == null) {
+            throw new NoActivityException("Activity cannot be null.");
+        }
+
+        for (DaySchedule schedule : schedules) {
+            if (schedule.getDay() == day) {
+                schedule.getActivities().add(activity);
+                break;
+            }
+        }
     }
 
-    public void removeActivity(String day, String activity){    //  if the activity doesn't exist throw the custom UNCHECKED exception: NoActivityException
-
+    public void removeActivity(Day day, String activity) {
+        for (DaySchedule schedule : schedules) {
+            if (schedule.getDay() == day) {
+                if (schedule.getActivities().remove(activity)) {
+                    return;
+                } else {
+                    throw new NoActivityException("Activity not found on " + day);
+                }
+            }
+        }
+        throw new NoActivityException("Day not found in the planner.");
     }
 
-    public List<String> getActivities(String day){
-        return new ArrayList<>();
+    public List<String> getActivities(Day day) {
+        for (DaySchedule schedule : schedules) {
+            if (schedule.getDay() == day) {
+                return schedule.getActivities();
+            }
+        }
+        throw new NoActivityException("Day not found in the planner.");
     }
 
-    public Map<Day, List<String>> endPlanning(){                // If there's a day without activities throw a custom CHECKED exception : NoActivitiesForDayException
+    public Map<Day, List<String>> endPlanning() throws NoActivitiesForDayException {
+        Map<Day, List<String>> activitiesMap = new TreeMap<>();
+        for (DaySchedule schedule : schedules) {
+            activitiesMap.put(schedule.getDay(), schedule.getActivities());
+        }
 
-        return new HashMap<>();
+        for (Day day : Day.values()) {
+            if (activitiesMap.get(day).isEmpty()) {
+                throw new NoActivitiesForDayException("No activities for " + day);
+            }
+        }
+        return activitiesMap;
     }
 }

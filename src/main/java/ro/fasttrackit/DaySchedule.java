@@ -1,5 +1,6 @@
 package ro.fasttrackit;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DaySchedule{
@@ -8,7 +9,7 @@ public class DaySchedule{
 
     public DaySchedule(Day day, List<String> activities) {
         this.day = day;
-        this.activities = activities;
+        this.activities = new ArrayList<>(activities);
     }
 
     public Day getDay() {
