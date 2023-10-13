@@ -1,4 +1,4 @@
-package ro.fasttrackit;
+package ro.fasttrackit.planner;
 
 import ro.fasttrackit.exceptions.NoActivitiesForDayException;
 import ro.fasttrackit.exceptions.NoActivityException;

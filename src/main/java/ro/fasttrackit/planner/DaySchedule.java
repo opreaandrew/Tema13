@@ -1,4 +1,4 @@
-package ro.fasttrackit;
+package ro.fasttrackit.planner;
 
 import java.util.ArrayList;
 import java.util.List;

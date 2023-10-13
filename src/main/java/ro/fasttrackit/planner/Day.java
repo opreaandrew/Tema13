@@ -1,4 +1,4 @@
-package ro.fasttrackit;
+package ro.fasttrackit.planner;
 
 public enum Day {
     MONDAY,
